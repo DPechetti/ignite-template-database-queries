@@ -13,9 +13,7 @@ export class GamesRepository implements IGamesRepository {
   }
 
   async findByTitleContaining(param: string): Promise<Game[]> {
-    return this.repository
-      .createQueryBuilder()
-      // Complete usando query builder
+    return this.repository.createQueryBuilder().where('title ILIKE :title', { title: `%${title}%` }).getMany();
   }
 
   async countAllGames(): Promise<[{ count: string }]> {
